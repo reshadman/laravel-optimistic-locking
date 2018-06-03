@@ -131,6 +131,9 @@ If the resource has been updated before your update attempt, then the above will
 update **no** records and it means that the model has been updated before
 current attempt or it has been deleted.
 
+### Why don't we use `updated_at` for tracking changes?
+Because they may remain the same during two concurrent updates.
+
 ## Running tests
 Clone the repo, perform a composer install and run:
 
