@@ -1,26 +1,21 @@
-sudo: requirelanguage: php
+language: php
 
 php:
+  - 7.0
   - 7.1
-  - 7.2
 
 env:
   matrix:
     - COMPOSER_FLAGS="--prefer-lowest"
     - COMPOSER_FLAGS=""
 
-before_install:
-  - sudo apt-get update
+before_script:
   - travis_retry composer self-update
-
-install:
-  - travis_retry composer update --prefer-source $COMPOSER_FLAGS
-  - travis_retry composer require league/flysystem-aws-s3-v3
-  - sudo apt-get install -y ghostscript
+  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+  - printf "\n" | pecl install imagick
 
 script:
-  - phpunit
+  - phpunit --coverage-text --coverage-clover=coverage.clover
 
-branches:
-  only:
-    - master
+after_script:
+  - php vendor/bin/ocular code-coverage:upload --format=php-clover coverage.clover
