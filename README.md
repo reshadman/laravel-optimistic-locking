@@ -6,6 +6,8 @@ Adds optimistic locking feature to eloquent models.
 composer require reshadman/laravel-optimistic-locking
 ```
 
+> This package supports Laravel 5.5.* and 5.6.*.
+
 ## Usage
 
 ### Basic usage
