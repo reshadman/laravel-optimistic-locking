@@ -29,7 +29,5 @@
         "psr-4": {
             "Reshadman\\OptimisticLocking\\Tests\\": "tests"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
