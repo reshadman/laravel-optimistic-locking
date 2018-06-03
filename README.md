@@ -1,4 +1,6 @@
 # Laravel Optimistic Locking
+![Build Status](http://img.shields.io/travis/reshadman/laravel-optimistic-locking/master.png?style=flat-square)
+
 Adds optimistic locking feature to eloquent models.
 
 ## Installation 
