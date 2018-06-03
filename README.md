@@ -129,7 +129,7 @@ to the update query of a **optimistically lockable model**:
 ```php
 <?php
 $query->where('id', $this->id)
-    ->where('lock_version', $this->lock_version + 1)
+    ->where('lock_version', $this->lock_version)
     ->update($changes);
 ```
 
