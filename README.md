@@ -44,10 +44,11 @@ on your business logic.
 
 ### Maintaining lock_version during business transactions
 
-You can keep track of a lock version during a business transaction:
+You can keep track of a lock version during a business transaction by informing your API or HTML client about the current version:
 ```html
 <input type="hidden" name="lock_version" value="{{$blogPost->lock_version}}" 
 ```
+      
 
 So if two authors are editing the same content concurrently,
 you can keep track of your **Read State**, and ask the second
