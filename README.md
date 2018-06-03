@@ -48,7 +48,7 @@ You can keep track of a lock version during a business transaction:
 ```
 
 So if two authors are editing the same content concurrently,
-you can keep track of your **Read State**, And ask the second
+you can keep track of your **Read State**, and ask the second
 author to rewrite his changes.
 
 ### Disabling and enabling optimistic locking
