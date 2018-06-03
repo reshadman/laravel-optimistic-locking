@@ -140,3 +140,8 @@ Because they may remain the same during two concurrent updates.
 Clone the repo, perform a composer install and run:
 
 ```vendor/bin/phpunit```
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+ense (MIT). Please see License File for more information.
