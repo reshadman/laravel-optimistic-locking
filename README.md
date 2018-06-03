@@ -35,9 +35,9 @@ Then you are ready to go, if the same resource is edited by two
 different processes **CONCURRENTLY** then the following exception
 will be raised:
 
-```
+```php
 <?php
-\Reshadman\OptimisticLocking\StaleModelLockingException::class
+\Reshadman\OptimisticLocking\StaleModelLockingException::class;
 ```
 
 You should catch the above exception and act properly based 
