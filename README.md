@@ -1,14 +1,14 @@
 # Laravel Optimistic Locking
 ![Build Status](http://img.shields.io/travis/reshadman/laravel-optimistic-locking/master.png?style=flat-square)
 
-Adds optimistic locking feature to eloquent models.
+Adds optimistic locking feature to Eloquent models.
 
 ## Installation 
 ```bash
 composer require reshadman/laravel-optimistic-locking
 ```
 
-> This package supports Laravel 5.5.* and 5.6.*.
+> This package supports Laravel 5.5.* and 5.6.* .
 
 ## Usage
 
@@ -24,7 +24,7 @@ class BlogPost extends Model {
 }
 ```
 
-and add the `lock_version` integer field to the table of the model:
+and add the integer `lock_version` field to the table of the model:
 ```php
 <?php
 
@@ -36,7 +36,8 @@ different processes **CONCURRENTLY** then the following exception
 will be raised:
 
 ```
-\Reshadman\OptimisticLocking\StaleModelLockingException
+<?php
+\Reshadman\OptimisticLocking\StaleModelLockingException::class
 ```
 
 You should catch the above exception and act properly based 
