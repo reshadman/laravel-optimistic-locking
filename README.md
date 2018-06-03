@@ -10,8 +10,7 @@ composer require reshadman/laravel-optimistic-locking
 
 ### Basic usage
 use the `\Reshadman\OptimisticLocking\OptimisticLocking` trait
-in your model, and add the `lock_version` integer field to the
-table of the model:
+in your model:
 
 ```php
 <?php
@@ -21,6 +20,7 @@ class BlogPost extends Model {
 }
 ```
 
+and add the `lock_version` integer field to the table of the model:
 ```php
 <?php
 
@@ -49,6 +49,53 @@ So if two authors are editing the same content concurrently,
 you can keep track of your **Read State**, And ask the second
 author to rewrite his changes.
 
+### Disabling and enabling optimistic locking
+You can disable and enable optimistic locking for a specific 
+instance:
+
+```php
+<?php
+$blogPost->disableLocking();
+$blogPost->enableLocking();
+```
+
+By default optimistic locking is enabled when you use
+`OptimisticLocking` trait in your model, to alter the default
+behaviour you can set the lock strictly to `false`:
+
+```php
+<?php
+class BlogPost extends \Illuminate\Database\Eloquent\Model 
+{
+    use \Reshadman\OptimisticLocking\OptimisticLocking;
+    
+    protected $lock = false;
+}
+```
+and then you may enable it: `$blogPost->enableLocking();`
+
+### Use a different column for tracking version
+By default the `lock_version` column is used for tracking
+version, you can alter that by overriding the following method
+of the trait:
+
+```php
+<?php
+class BlogPost extends \Illuminate\Database\Eloquent\Model
+{
+    use \Reshadman\OptimisticLocking\OptimisticLocking;
+    
+    /**
+     * Name of the lock version column.
+     *
+     * @return string
+     */
+    protected static function lockVersionColumn()
+    {
+        return 'track_version';
+    }
+}
+```
 
 ## What is optimistic locking?
 For detailed explanation read the concurrency section of [*Patterns of Enterprise Application Architecture by Martin Fowler*](https://www.martinfowler.com/eaaCatalog/optimisticOfflineLock.html).
@@ -74,14 +121,17 @@ business logic. That is simply via adding the following criteria
 to the update query of a **optimistically lockable model**:
 
 ```php
-$query->where('id', $this->id)->where('lock_version', $this->lock_version + 1)
+<?php
+$query->where('id', $this->id)
+    ->where('lock_version', $this->lock_version + 1)
+    ->update($changes);
 ```
 
-If the version has been updated before your update, it will simply
-update no records and means that the model has been updated before
-current update attempt or has been deleted.
+If the resource has been updated before your update attempt, then the above will simply
+update **no** records and it means that the model has been updated before
+current attempt or it has been deleted.
 
 ## Running tests
-Clone the repo perform a composer install and run:
+Clone the repo, perform a composer install and run:
 
 ```vendor/bin/phpunit```
