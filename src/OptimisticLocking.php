@@ -19,7 +19,7 @@ trait OptimisticLocking
      *
      * @return void
      */
-    protected static function bootOptimisticLockingTrait()
+    protected static function bootOptimisticLocking()
     {
         static::creating(function (Model $model) {
 
