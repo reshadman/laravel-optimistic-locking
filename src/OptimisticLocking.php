@@ -31,8 +31,6 @@ trait OptimisticLocking
 
             return $model;
         });
-
-        parent::boot();
     }
 
     /**
