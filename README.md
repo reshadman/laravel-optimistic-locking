@@ -49,7 +49,23 @@ You can keep track of a lock version during a business transaction by informing 
 ```html
 <input type="hidden" name="lock_version" value="{{$blogPost->lock_version}}" 
 ```
-      
+and in controller: 
+```php
+<?php
+
+// Explicitly setting the lock version
+class PostController {
+    public function update($id)
+    {
+        $post = Post::findOrFail($id);
+        $post->lock_version = request('lock_version');
+        $post->save();
+        // You can also define more implicit reusable methods in your model like Model::saveWithVersion(...$args); 
+        // or just override the default Model::save(...$args); method which accepts $options
+        // Then automatically read the lock version from Request and set into the model.
+    }
+}
+```
 
 So if two authors are editing the same content concurrently,
 you can keep track of your **Read State**, and ask the second
