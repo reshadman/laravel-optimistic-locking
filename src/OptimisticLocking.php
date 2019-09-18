@@ -135,7 +135,7 @@ trait OptimisticLocking
      *
      * @return bool
      */
-    protected function lockingEnabled()
+    public function lockingEnabled()
     {
         return $this->lock === null ? true : $this->lock;
     }
@@ -145,7 +145,7 @@ trait OptimisticLocking
      *
      * @return $this
      */
-    protected function disableLocking()
+    public function disableLocking()
     {
         $this->lock = false;
         return $this;
